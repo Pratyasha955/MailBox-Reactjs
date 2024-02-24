@@ -1,0 +1,100 @@
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.17);
+}
+
+.login-form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form {
+    max-width: 400px; /* Adjust as needed */
+    width: 100%;
+    padding: 30px;
+    background-color: #ffffff;
+}
+
+.login-img {
+    width: 100%; /* Adjust as needed */
+    object-fit: cover;
+    border-radius: 8px 0 0 8px; /* Rounded corner on the left */
+}
+
+.form-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333333;
+}
+
+.login-form label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #333333;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    color: #ff0000;
+    margin-top: 10px;
+    background-color: #ffecec;
+    padding: 10px;
+    border: 1px solid #ffb3b3;
+    border-radius: 5px;
+}
+
+.signup-message {
+    color: #0077ff;
+    margin-top: 10px;
+    background-color: #ecffff;
+    padding: 10px;
+    border: 1px solid #64d1e4;
+    border-radius: 5px;
+}
+
+.Forgot-Password {
+    color: #0077ff;
+    margin-top: 10px;
+    background-color: #ecffff;
+    padding: 10px;
+    border: 1px solid #64d1e4;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.wave {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}

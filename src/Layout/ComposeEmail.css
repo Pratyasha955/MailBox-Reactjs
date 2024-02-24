@@ -1,0 +1,36 @@
+.compose-email-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-top: -20px;
+  }
+  
+  .compose-email {
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .compose-email-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .compose-email-fields .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .compose-email-editor {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .compose-emails-footer {
+    margin-top: 30px;
+    text-align: right;
+  }
