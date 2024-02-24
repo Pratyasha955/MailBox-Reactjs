@@ -22,7 +22,7 @@ function SignupPage() {
     try {
       // Send request to Google Identity Toolkit API for login
       const response = await fetch(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD56YNYrpiTJXSOIMFIbA23CwnQQytqfpY`,
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCi8np-w6bC6OmX92p2J4JX-JF87puzk7Q',
         {
           method: 'POST',
           headers: {

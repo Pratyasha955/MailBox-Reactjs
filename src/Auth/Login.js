@@ -24,7 +24,7 @@ function LoginPage() {
 
         try {
             const response = await fetch(
-                'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD56YNYrpiTJXSOIMFIbA23CwnQQytqfpY',
+                'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCi8np-w6bC6OmX92p2J4JX-JF87puzk7Q',
                 {
                     method: 'POST',
                     headers: {
