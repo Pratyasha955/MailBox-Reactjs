@@ -46,7 +46,7 @@ function ComposeEmail({ onClose }) {
             const sanitizedSenderEmail = currentUserEmail.replace(/[@.]/g, '');
             const sanitizedRecipientEmail = to.replace(/[@.]/g, '');
 
-            const sentboxResponse = await fetch(`https://mail-box-cf1f8-default-rtdb.firebaseio.com/${sanitizedSenderEmail}/sentbox.json`, {
+            const sentboxResponse = await fetch(`https://mailbox-7d546-default-rtdb.firebaseio.com/${sanitizedSenderEmail}/sentbox.json`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ function ComposeEmail({ onClose }) {
                 throw new Error('Failed to save in sentbox');
             }
 
-            const inboxResponse = await fetch(`https://mail-box-cf1f8-default-rtdb.firebaseio.com/${sanitizedRecipientEmail}/inbox.json`, {
+            const inboxResponse = await fetch(`https://mailbox-7d546-default-rtdb.firebaseio.com/${sanitizedRecipientEmail}/inbox.json`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
