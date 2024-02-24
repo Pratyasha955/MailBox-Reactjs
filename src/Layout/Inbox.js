@@ -20,7 +20,7 @@ function Inbox() {
     const fetchReceivedEmails = useCallback(async () => {
         try {
             const sanitizedRecipientEmail = currentUserEmail.replace(/[@.]/g, '');
-            const response = await fetch(`https://mail-box-cf1f8-default-rtdb.firebaseio.com/${sanitizedRecipientEmail}/inbox.json`);
+            const response = await fetch(`https://mailbox-7d546-default-rtdb.firebaseio.com/${sanitizedRecipientEmail}/inbox.json`);
             if (!response.ok) {
                 throw new Error('Failed to fetch inbox');
             }
@@ -84,7 +84,7 @@ function Inbox() {
 
         try {
             const sanitizedRecipientEmail = currentUserEmail.replace(/[@.]/g, '');
-            const response = await fetch(`https://mail-box-cf1f8-default-rtdb.firebaseio.com/${sanitizedRecipientEmail}/inbox/${email.id}.json`, {
+            const response = await fetch(`https://mailbox-7d546-default-rtdb.firebaseio.com/${sanitizedRecipientEmail}/inbox/${email.id}.json`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -102,7 +102,7 @@ function Inbox() {
     const handleDelete = async (emailId) => {
         try {
             const sanitizedRecipientEmail = currentUserEmail.replace(/[@.]/g, '');
-            const response = await fetch(`https://mail-box-cf1f8-default-rtdb.firebaseio.com/${sanitizedRecipientEmail}/inbox/${emailId}.json`, {
+            const response = await fetch(`https://mailbox-7d546-default-rtdb.firebaseio.com/${sanitizedRecipientEmail}/inbox/${emailId}.json`, {
                 method: 'DELETE'
             });
             if (!response.ok) {
