@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../Layout/header';
-import Sidebar from '../Layout/sidebar'; 
+import Header from '../Layout/Header';
+import Sidebar from '../Layout/Sidebar'; 
 import { useSelector } from 'react-redux';
 import Inbox from '../Layout/Inbox';
 import ComposeEmail from '../Layout/ComposeEmail';

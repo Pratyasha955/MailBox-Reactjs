@@ -1,18 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setReceivedMails } from '../Reducer/MailSlice';
-import { faStar, faTrash } from '@fortawesome/free-solid-svg-icons';
+import {  faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import EmailDetails from './EmailDetails';
+import EmailCardDetails from './EmailCardDetails';
 
 function Sent() {
     const currentUserEmail = useSelector((state) => state.auth.user?.email);
     const receivedMails = useSelector((state) => state.mail.receivedMails);
     const dispatch = useDispatch();
-
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredEmails, setFilteredEmails] = useState([]);
-    const [starred, setStarred] = useState([]);
     const [selectedEmail, setSelectedEmail] = useState(null); 
     const [showEmailDetails, setShowEmailDetails] = useState(false);
 
@@ -64,11 +62,6 @@ function Sent() {
         }
     }, [searchQuery, receivedMails]);
 
-    const toggleStar = (index) => {
-        const newStarred = [...starred];
-        newStarred[index] = !newStarred[index];
-        setStarred(newStarred);
-    };
 
     const handleEmailClick = async (email) => {
         const updatedEmails = receivedMails.map(item => {
@@ -120,7 +113,7 @@ function Sent() {
 
     const renderSelectedEmail = () => {
         if (selectedEmail && showEmailDetails) {
-            return <EmailDetails email={selectedEmail} onBack={handleBackToInbox} />;
+            return <EmailCardDetails email={selectedEmail} onBack={handleBackToInbox} />;
         }
         return null;
     };
@@ -149,9 +142,6 @@ function Sent() {
                                             <td className="action"><input type="checkbox" /></td>
                                             <td className="name">
                                                 { !email.read && <span className="dot blue-dot"></span> }
-                                                <span className="star-icon" onClick={() => toggleStar(index)}>
-                                                    <FontAwesomeIcon icon={faStar} style={{ color: starred[index] ? 'gold' : 'black' }} />
-                                                </span>
                                                 {email.sender}
                                             </td>
                                             <td className="subject">{email.subject}</td>

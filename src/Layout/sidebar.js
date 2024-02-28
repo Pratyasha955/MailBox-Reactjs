@@ -12,7 +12,7 @@ function Sidebar({ onComposeClick, onInboxClick, onSentClick }) {
     const fetchUnreadCount = async () => {
       try {
         const sanitizedRecipientEmail = currentUserEmail.replace(/[@.]/g, '');
-        const response = await fetch(`https://mail-box-cf1f8-default-rtdb.firebaseio.com/${sanitizedRecipientEmail}/inbox.json`);
+        const response = await fetch(`https://mailbox-7d546-default-rtdb.firebaseio.com/${sanitizedRecipientEmail}/inbox.json`);
 
         if (!response.ok) {
           throw new Error('Failed to fetch unread count');
