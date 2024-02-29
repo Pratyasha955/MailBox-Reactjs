@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const mailSlice = createSlice({
   name: 'mail',
   initialState: {
-    receivedMails: [], 
+    receivedMails: [],
   },
   reducers: {
     setReceivedMails: (state, action) => {

@@ -143,7 +143,7 @@ function Sent() {
                                             <td className="action"><input type="checkbox" /></td>
                                             <td className="name">
                                                 { !email.read && <span className="dot blue-dot"></span> }
-                                                {email.sender}
+                                                TO:{email.receiver}
                                             </td>
                                             <td className="subject">{email.subject}</td>
                                             <td className="time">{email.timestamp}</td>
