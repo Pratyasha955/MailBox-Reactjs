@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setReceivedMails } from '../Reducer/MailSlice';
+import { setReceivedMails } from '../Reducer/mailSlice';
 import {  faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import EmailCardDetails from './EmailCardDetails'; 

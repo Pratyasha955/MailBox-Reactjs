@@ -22,4 +22,4 @@ function EmailCardDetails({ email, onBack  }) {
     );
 }
 
-export default EmailCardDetails;
+export default EmailCardDetails ;

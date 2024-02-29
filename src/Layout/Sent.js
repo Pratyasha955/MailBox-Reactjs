@@ -1,70 +1,71 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setReceivedMails } from '../Reducer/MailSlice';
-import {  faTrash } from '@fortawesome/free-solid-svg-icons';
+import { setSentMails } from '../Reducer/sentSlice'; 
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import EmailCardDetails from './EmailCardDetails';
+import EmailCardDetails from './EmailCardDetails'; 
 
 function Sent() {
-    const currentUserEmail = useSelector((state) => state.auth.user?.email);
-    const receivedMails = useSelector((state) => state.mail.receivedMails);
-    const dispatch = useDispatch();
-    const [searchQuery, setSearchQuery] = useState('');
-    const [filteredEmails, setFilteredEmails] = useState([]);
-    const [selectedEmail, setSelectedEmail] = useState(null); 
-    const [showEmailDetails, setShowEmailDetails] = useState(false);
+  const currentUserEmail = useSelector((state) => state.auth.user?.email);
+  const sentMails = useSelector((state) => state.sent.sentMails); 
+  const dispatch = useDispatch();
 
-    const fetchReceivedEmails = useCallback(async () => {
-        try {
-            const sanitizedRecipientEmail = currentUserEmail.replace(/[@.]/g, '');
-            const response = await fetch(`https://mailbox-7d546-default-rtdb.firebaseio.com/${sanitizedRecipientEmail}/sentbox.json`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch inbox');
-            }
-            const data = await response.json();
-            console.log('Fetched Data:', data);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredEmails, setFilteredEmails] = useState([]);
+  const [selectedEmail, setSelectedEmail] = useState(null); 
+  const [showEmailDetails, setShowEmailDetails] = useState(false);
 
-            if (data) {
-                const emails = Object.keys(data).map(timestamp => {
-                    const emailData = data[timestamp];
-                    return {
-                        id: timestamp,
-                        sender: emailData.sender,
-                        receiver: emailData.receiver,
-                        subject: emailData.subject,
-                        message: emailData.message,
-                        timestamp: emailData.timestamp,
-                        read: emailData.read || false 
-                    };
-                });
-                console.log('Mapped Emails:', emails);
-                dispatch(setReceivedMails(emails));
-            }
-        } catch (error) {
-            console.error('Error fetching received emails:', error);
-        }
-    }, [currentUserEmail, dispatch]);
+  // Fetch sent emails
+  const fetchSentEmails = useCallback(async () => {
+    try {
+      const sanitizedSenderEmail = currentUserEmail.replace(/[@.]/g, '');
+      const response = await fetch(`https://mailbox-7d546-default-rtdb.firebaseio.com/${sanitizedSenderEmail}/sentbox.json`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch sentbox');
+      }
+      const data = await response.json();
 
-    useEffect(() => {
-        fetchReceivedEmails();
-    }, [fetchReceivedEmails]);
+      if (data) {
+        const emails = Object.keys(data).map(timestamp => {
+          const emailData = data[timestamp];
+          return {
+            id: timestamp,
+            sender: emailData.sender,
+            receiver: emailData.receiver,
+            subject: emailData.subject,
+            message: emailData.message,
+            timestamp: emailData.timestamp,
+            read: emailData.read || false 
+          };
+        });
+        dispatch(setSentMails(emails));
+      }
+    } catch (error) {
+      console.error('Error fetching sent emails:', error);
+    }
+  }, [currentUserEmail, dispatch]);
 
-    useEffect(() => {
-        if (searchQuery.trim() === '') {
-            setFilteredEmails(receivedMails);
-        } else {
-            const filtered = receivedMails.filter(email =>
-                email.sender.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                email.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                (email.message && email.message.toLowerCase().includes(searchQuery.toLowerCase()))
-            );
-            setFilteredEmails(filtered);
-        }
-    }, [searchQuery, receivedMails]);
+  useEffect(() => {
+    fetchSentEmails();
+  }, [fetchSentEmails]);
+
+  useEffect(() => {
+    if (searchQuery.trim() === '') {
+      setFilteredEmails(sentMails);
+    } else {
+      const filtered = sentMails.filter(email =>
+        email.sender.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        email.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (email.message && email.message.toLowerCase().includes(searchQuery.toLowerCase()))
+      );
+      setFilteredEmails(filtered);
+    }
+  }, [searchQuery, sentMails]);
+
 
 
     const handleEmailClick = async (email) => {
-        const updatedEmails = receivedMails.map(item => {
+        const updatedEmails = sentMails.map(item => {
             if (item.id === email.id && !item.read) {
                 return { ...item, read: true };
             }
@@ -100,8 +101,8 @@ function Sent() {
             if (!response.ok) {
                 throw new Error('Failed to delete email from Firebase');
             }
-            const updatedEmails = receivedMails.filter(email => email.id !== emailId);
-            dispatch(setReceivedMails(updatedEmails));
+            const updatedEmails = sentMails.filter(email => email.id !== emailId);
+            dispatch(setSentMails(updatedEmails));
         } catch (error) {
             console.error('Error deleting email:', error);
         }
